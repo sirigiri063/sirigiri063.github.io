@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sirigiri Malakonda Reddy — Business Analyst</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;800;900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0F1825;
+    --ink-soft:#16233A;
+    --paper:#F4F6F9;
+    --card:#FFFFFF;
+    --amber:#D79A3B;
+    --amber-deep:#B97F22;
+    --teal:#1B6E73;
+    --slate:#39424F;
+    --slate-light:#6B7686;
+    --line:#DCE3EC;
+    --line-dark:rgba(255,255,255,0.14);
+    --maxw:1120px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{animation:none !important; transition:none !important;}
+  }
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--slate);
+    font-family:'Inter',sans-serif;
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3{font-family:'Archivo',sans-serif; color:var(--ink); margin:0;}
+  a{color:inherit;}
+  ul{margin:0; padding:0;}
+  .mono{font-family:'JetBrains Mono',monospace;}
+  .wrap{max-width:var(--maxw); margin:0 auto; padding:0 32px;}
+  :focus-visible{outline:2px solid var(--amber); outline-offset:3px;}
+
+  /* ---------- NAV ---------- */
+  header.nav{
+    position:sticky; top:0; z-index:100;
+    background:rgba(15,24,37,0.92);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line-dark);
+  }
+  .nav-inner{
+    max-width:var(--maxw); margin:0 auto; padding:16px 32px;
+    display:flex; align-items:center; justify-content:space-between;
+  }
+  .logo{
+    font-family:'JetBrains Mono',monospace; font-weight:700; color:var(--amber);
+    font-size:0.95rem; letter-spacing:0.04em;
+    border:1px solid var(--line-dark); padding:4px 10px; border-radius:3px;
+  }
+  nav.links{display:flex; gap:28px;}
+  nav.links a{
+    color:rgba(255,255,255,0.78); text-decoration:none; font-size:0.92rem; font-weight:500;
+    padding:6px 2px; border-bottom:2px solid transparent; transition:color .2s, border-color .2s;
+  }
+  nav.links a:hover{color:var(--amber); border-color:var(--amber);}
+  .menu-btn{
+    display:none; background:none; border:1px solid var(--line-dark); border-radius:4px;
+    color:#fff; width:38px; height:38px; cursor:pointer; font-size:1.1rem;
+  }
+  @media (max-width:760px){
+    nav.links{
+      position:absolute; top:100%; left:0; right:0; background:var(--ink);
+      flex-direction:column; gap:0; max-height:0; overflow:hidden; border-bottom:1px solid var(--line-dark);
+      transition:max-height .3s ease;
+    }
+    nav.links.open{max-height:340px;}
+    nav.links a{padding:14px 32px; width:100%; border-bottom:1px solid var(--line-dark); border-left:none;}
+    .menu-btn{display:flex; align-items:center; justify-content:center;}
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative; background:var(--ink); color:#fff; overflow:hidden;
+    padding:96px 32px 0;
+  }
+  .hero::before{
+    content:""; position:absolute; inset:0;
+    background-image:
+      repeating-linear-gradient(0deg, rgba(255,255,255,0.045) 0 1px, transparent 1px 48px),
+      repeating-linear-gradient(90deg, rgba(255,255,255,0.045) 0 1px, transparent 1px 48px);
+    mask-image:radial-gradient(circle at 30% 20%, rgba(0,0,0,0.9), transparent 70%);
+    pointer-events:none;
+  }
+  .hero-inner{max-width:var(--maxw); margin:0 auto; position:relative; z-index:1;}
+  .eyebrow{
+    font-family:'JetBrains Mono',monospace; color:var(--amber); font-size:0.82rem;
+    letter-spacing:0.12em; text-transform:uppercase; margin-bottom:18px; display:block;
+  }
+  .hero h1{
+    font-size:clamp(2.3rem,6vw,4.2rem); font-weight:900; letter-spacing:-0.02em; line-height:1.04; color:#fff;
+  }
+  .hero .role{
+    font-size:clamp(1.05rem,2.2vw,1.3rem); color:var(--amber); font-weight:600; margin-top:14px;
+  }
+  .hero p.bio{
+    max-width:600px; color:rgba(255,255,255,0.74); font-size:1.04rem; margin-top:18px;
+  }
+  .chip-row{display:flex; flex-wrap:wrap; gap:10px; margin-top:26px;}
+  .chip{
+    border:1px solid var(--line-dark); padding:7px 14px; border-radius:999px;
+    font-size:0.85rem; color:rgba(255,255,255,0.85); text-decoration:none;
+  }
+  .btn-row{display:flex; flex-wrap:wrap; gap:14px; margin-top:28px;}
+  .btn{
+    display:inline-flex; align-items:center; gap:8px; padding:12px 22px; border-radius:4px;
+    font-weight:600; font-size:0.92rem; text-decoration:none; transition:transform .15s, opacity .15s;
+  }
+  .btn:hover{transform:translateY(-2px);}
+  .btn-primary{background:var(--amber); color:var(--ink);}
+  .btn-secondary{border:1px solid rgba(255,255,255,0.35); color:#fff;}
+
+  /* KPI ledger strip — signature element */
+  .ledger{
+    margin-top:48px; display:grid; grid-template-columns:repeat(4,1fr);
+    border:1px solid var(--line-dark); border-radius:3px; background:rgba(255,255,255,0.03);
+    position:relative; z-index:1;
+  }
+  .ledger-cell{
+    padding:22px 22px; border-right:1px solid var(--line-dark);
+    display:flex; flex-direction:column; gap:6px;
+  }
+  .ledger-cell:last-child{border-right:none;}
+  .ledger-num{font-family:'JetBrains Mono',monospace; font-weight:700; color:var(--amber); font-size:clamp(1.4rem,2.6vw,1.9rem);}
+  .ledger-label{font-size:0.72rem; text-transform:uppercase; letter-spacing:0.07em; color:rgba(255,255,255,0.55);}
+  @media (max-width:680px){
+    .ledger{grid-template-columns:repeat(2,1fr);}
+    .ledger-cell:nth-child(2){border-right:none;}
+  }
+  .hero-bottom-space{height:72px;}
+
+  /* ---------- SECTIONS ---------- */
+  section{padding:90px 32px;}
+  .section-head{margin-bottom:44px;}
+  .section-head .eyebrow{color:var(--teal);}
+  .section-head h2{font-size:clamp(1.7rem,3.4vw,2.2rem);}
+
+  .reveal{opacity:0; transform:translateY(16px); transition:opacity .6s ease, transform .6s ease;}
+  .reveal.visible{opacity:1; transform:translateY(0);}
+
+  /* About */
+  #profile .lede{font-size:1.12rem; max-width:720px; color:var(--ink); font-weight:500;}
+  #profile .body-text{max-width:720px; margin-top:16px; color:var(--slate);}
+
+  /* Experience */
+  .timeline{display:flex; flex-direction:column; gap:44px;}
+  .tl-item{position:relative; padding-left:28px; border-left:2px solid var(--line);}
+  .tl-item::before{
+    content:""; position:absolute; left:-6px; top:2px; width:10px; height:10px;
+    background:var(--amber); border-radius:1px;
+  }
+  .tl-head{display:flex; flex-wrap:wrap; justify-content:space-between; gap:10px; align-items:baseline;}
+  .tl-role{font-weight:700; color:var(--ink); font-size:1.08rem;}
+  .tl-meta{font-family:'JetBrains Mono',monospace; font-size:0.82rem; color:var(--slate-light); white-space:nowrap;}
+  .tl-company{color:var(--teal); font-weight:600; font-size:0.94rem; margin-top:2px;}
+  .tl-bullets{margin-top:14px; display:flex; flex-direction:column; gap:8px;}
+  .tl-bullets li{list-style:none; padding-left:18px; position:relative; color:var(--slate); font-size:0.96rem;}
+  .tl-bullets li::before{content:"—"; position:absolute; left:0; color:var(--slate-light);}
+  .tags{display:flex; flex-wrap:wrap; gap:8px; margin-top:16px;}
+  .tag{
+    font-family:'JetBrains Mono',monospace; font-size:0.76rem; color:var(--teal);
+    border:1px solid var(--teal); background:rgba(27,110,115,0.06);
+    padding:4px 10px; border-radius:3px;
+  }
+
+  /* Projects */
+  .proj-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(340px,1fr)); gap:26px;}
+  .proj-card{
+    background:var(--card); border:1px solid var(--line); border-radius:6px;
+    padding:28px; display:flex; flex-direction:column; gap:14px;
+    transition:transform .2s ease, box-shadow .2s ease;
+  }
+  .proj-card:hover{transform:translateY(-5px); box-shadow:0 14px 28px -16px rgba(15,24,37,0.25);}
+  .proj-top{display:flex; justify-content:space-between; gap:12px; align-items:baseline;}
+  .proj-title{font-family:'Archivo',sans-serif; font-weight:800; font-size:1.12rem; color:var(--ink);}
+  .proj-period{font-family:'JetBrains Mono',monospace; font-size:0.74rem; color:var(--slate-light); white-space:nowrap;}
+  .proj-desc{color:var(--slate); font-size:0.94rem;}
+  .proj-stat{
+    border-left:3px solid var(--amber); background:var(--paper); padding:10px 14px;
+    font-size:0.86rem; color:var(--ink);
+  }
+  .proj-stat .mono{color:var(--amber-deep); font-weight:600;}
+  .proj-foot{display:flex; justify-content:space-between; align-items:center; margin-top:auto; padding-top:6px;}
+  .proj-link{color:var(--teal); font-weight:600; font-size:0.88rem; text-decoration:none;}
+  .proj-link:hover{text-decoration:underline;}
+
+  /* Skills */
+  .skills-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(210px,1fr)); gap:32px;}
+  .skill-group h3{
+    font-family:'JetBrains Mono',monospace; font-size:0.8rem; color:var(--teal);
+    text-transform:uppercase; letter-spacing:0.06em; margin-bottom:14px; font-weight:600;
+  }
+  .pill-row{display:flex; flex-wrap:wrap; gap:8px;}
+  .pill{
+    border:1px solid var(--line); background:var(--card); color:var(--slate);
+    padding:7px 13px; border-radius:999px; font-size:0.85rem;
+  }
+
+  /* Education / Certifications */
+  .subhead{
+    font-family:'JetBrains Mono',monospace; font-size:0.82rem; color:var(--slate-light);
+    text-transform:uppercase; letter-spacing:0.07em; margin-bottom:18px;
+  }
+  .cred-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:16px;}
+  .cred-card{
+    background:var(--card); border:1px solid var(--line); border-radius:6px;
+    padding:18px 20px; border-left:3px solid var(--teal);
+  }
+  .cred-card.cert{border-left-color:var(--amber);}
+  .cred-card .name{font-weight:700; color:var(--ink); font-size:0.96rem;}
+  .cred-card .issuer{color:var(--slate); font-size:0.86rem; margin-top:4px;}
+  .cred-card .meta{display:flex; justify-content:space-between; align-items:baseline; margin-top:10px;}
+  .cred-card .date{font-family:'JetBrains Mono',monospace; font-size:0.72rem; color:var(--slate-light);}
+  .cred-card .cgpa{font-family:'JetBrains Mono',monospace; font-size:0.72rem; color:var(--amber-deep); font-weight:600;}
+  .edu-block{margin-bottom:40px;}
+
+  /* Awards callout */
+  .award-card{
+    background:var(--ink); color:#fff; border-radius:6px; padding:36px;
+    display:flex; gap:20px; align-items:flex-start;
+  }
+  .award-mark{width:14px; height:14px; background:var(--amber); border-radius:2px; flex-shrink:0; margin-top:6px;}
+  .award-card h3{color:#fff; font-size:1.1rem; font-family:'Archivo',sans-serif; font-weight:800;}
+  .award-card .award-meta{font-family:'JetBrains Mono',monospace; font-size:0.74rem; color:rgba(255,255,255,0.5); margin-top:4px;}
+  .award-card p{color:rgba(255,255,255,0.75); margin-top:8px; font-size:0.95rem;}
+
+  /* Contact / footer */
+  footer{background:var(--ink); color:#fff; padding:90px 32px 40px;}
+  .contact-inner{max-width:760px; margin:0 auto; text-align:center;}
+  footer .eyebrow{color:var(--amber);}
+  footer h2{color:#fff; font-size:clamp(1.6rem,3.4vw,2.1rem); margin-top:10px;}
+  footer .sub{color:rgba(255,255,255,0.7); margin-top:14px; font-size:1.02rem;}
+  .contact-grid{
+    display:flex; flex-wrap:wrap; justify-content:center; gap:0; margin-top:48px;
+    border:1px solid var(--line-dark); border-radius:4px; overflow:hidden;
+  }
+  .contact-item{
+    flex:1 1 160px; padding:20px 16px; border-right:1px solid var(--line-dark);
+    display:flex; flex-direction:column; gap:6px;
+  }
+  .contact-item:last-child{border-right:none;}
+  .contact-item .label{font-family:'JetBrains Mono',monospace; font-size:0.7rem; text-transform:uppercase; letter-spacing:0.07em; color:rgba(255,255,255,0.5);}
+  .contact-item .value{font-size:0.92rem; font-weight:600; color:#fff; text-decoration:none; word-break:break-word;}
+  .contact-item .value:hover{color:var(--amber);}
+  .copyright{margin-top:56px; text-align:center; font-size:0.8rem; color:rgba(255,255,255,0.4); border-top:1px solid var(--line-dark); padding-top:24px;}
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="nav-inner">
+    <span class="logo">SMR</span>
+    <nav class="links" id="navLinks">
+      <a href="#profile">Profile</a>
+      <a href="#experience">Experience</a>
+      <a href="#projects">Projects</a>
+      <a href="#skills">Skills</a>
+      <a href="#education">Education</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <button class="menu-btn" id="menuBtn" aria-label="Toggle menu">☰</button>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-inner">
+    <span class="eyebrow">Business Analyst Portfolio</span>
+    <h1>SIRIGIRI MALAKONDA<br>REDDY</h1>
+    <p class="role">Business Analyst — Reporting &amp; Analysis · Power BI · SQL · Advanced Excel</p>
+    <p class="bio">I clean messy spreadsheets, turn them into Power BI dashboards stakeholders actually trust, and use SQL and Advanced Excel to find the number that changes the decision.</p>
+    <div class="chip-row">
+      <span class="chip">📍 Hyderabad, Telangana</span>
+      <span class="chip">+91 9121855894</span>
+      <span class="chip">sirigiri.063@gmail.com</span>
+    </div>
+    <div class="btn-row">
+      <a class="btn btn-primary" href="https://github.com/sirigiri063" target="_blank" rel="noopener">View GitHub ↗</a>
+      <a class="btn btn-secondary" href="https://www.linkedin.com/in/sirigiri03/" target="_blank" rel="noopener">Connect on LinkedIn ↗</a>
+    </div>
+
+    <div class="ledger">
+      <div class="ledger-cell">
+        <span class="ledger-num">800+</span>
+        <span class="ledger-label">Records cleaned &amp; validated</span>
+      </div>
+      <div class="ledger-cell">
+        <span class="ledger-num">20%</span>
+        <span class="ledger-label">ROI improvement driven</span>
+      </div>
+      <div class="ledger-cell">
+        <span class="ledger-num">$118.7M</span>
+        <span class="ledger-label">In sales tracked across dashboards</span>
+      </div>
+      <div class="ledger-cell">
+        <span class="ledger-num">4</span>
+        <span class="ledger-label">Power BI dashboards shipped</span>
+      </div>
+    </div>
+  </div>
+  <div class="hero-bottom-space"></div>
+</section>
+
+<section id="profile">
+  <div class="wrap section-head reveal">
+    <span class="eyebrow">// Profile</span>
+    <h2>Results-driven, data-first.</h2>
+  </div>
+  <div class="wrap reveal">
+    <p class="lede">A Business Analyst and data preparation &amp; reporting specialist with 1+ year of experience turning raw data into decisions across marketing and financial domains.</p>
+    <p class="body-text">I've validated and cleaned 800+ financial records and built Power BI dashboards that drove a 20% ROI improvement and 15–20% growth in lead conversions, and I'm comfortable owning a dataset from first cleanup through to a stakeholder-ready report. I'm skilled in requirement gathering, stakeholder reporting, SQL, and Advanced Excel — and I'm currently looking for a Business Analyst role where I can put those skills to work on business intelligence and data quality initiatives.</p>
+  </div>
+</section>
+
+<section id="experience" style="background:var(--card); border-top:1px solid var(--line); border-bottom:1px solid var(--line);">
+  <div class="wrap section-head reveal">
+    <span class="eyebrow">// Experience</span>
+    <h2>Where I've put this to work.</h2>
+  </div>
+  <div class="wrap">
+    <div class="timeline">
+      <div class="tl-item reveal">
+        <div class="tl-head">
+          <div>
+            <div class="tl-role">Digital Marketing Executive <span style="color:var(--slate-light); font-weight:500;">· Freelance</span></div>
+            <div class="tl-company">Roll Home Developers</div>
+          </div>
+          <div class="tl-meta">Jul 2025 – Apr 2026 · Hybrid, Hyderabad</div>
+        </div>
+        <ul class="tl-bullets">
+          <li>Generated weekly and monthly reports tracking 5+ KPIs, including lead generation, conversion rate, CTR, impressions, and customer engagement.</li>
+          <li>Developed Power BI dashboards to monitor campaign performance and enable data-driven business decisions.</li>
+          <li>Extracted and analyzed data from multiple sources, contributing to a 15–20% increase in lead conversions through campaign optimization.</li>
+        </ul>
+        <div class="tags"><span class="tag">GOOGLE ADS</span><span class="tag">MS OFFICE</span><span class="tag">GOOGLE ANALYTICS</span></div>
+      </div>
+
+      <div class="tl-item reveal">
+        <div class="tl-head">
+          <div>
+            <div class="tl-role">Process Lead &amp; Digital Marketing Strategist <span style="color:var(--slate-light); font-weight:500;">· Full-time</span></div>
+            <div class="tl-company">Anyra Projects</div>
+          </div>
+          <div class="tl-meta">Feb 2025 – Jun 2025 · On-site, Hyderabad</div>
+        </div>
+        <ul class="tl-bullets">
+          <li>Managed campaign reporting and performance analysis, resulting in a 20% improvement in ROI.</li>
+          <li>Developed KPI reports and dashboards for stakeholders to enhance strategic decision-making.</li>
+          <li>Collaborated with cross-functional teams to align business objectives with marketing performance insights.</li>
+        </ul>
+        <div class="tags"><span class="tag">EXCEL</span><span class="tag">GOOGLE ADS</span><span class="tag">GOOGLE TRENDS</span></div>
+      </div>
+
+      <div class="tl-item reveal">
+        <div class="tl-head">
+          <div>
+            <div class="tl-role">Digital Marketing Internship</div>
+            <div class="tl-company">Adwink</div>
+          </div>
+          <div class="tl-meta">Feb 2024 – Jun 2024 · On-site, Hyderabad</div>
+        </div>
+        <ul class="tl-bullets">
+          <li>Generated daily and weekly dashboards to track campaign performance and reported findings to the team.</li>
+          <li>Conducted market research and competitor analysis to support business planning and executive presentations.</li>
+          <li>Analyzed engagement metrics, identifying opportunities that improved overall campaign performance by 30%.</li>
+        </ul>
+        <div class="tags"><span class="tag">EXCEL</span><span class="tag">POWERPOINT</span><span class="tag">GOOGLE ADS</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="wrap section-head reveal">
+    <span class="eyebrow">// Projects</span>
+    <h2>Dashboards built from real data.</h2>
+  </div>
+  <div class="wrap proj-grid reveal">
+
+    <div class="proj-card">
+      <div class="proj-top">
+        <span class="proj-title">Finance Sales Analysis Dashboard</span>
+        <span class="proj-period">May – Jun 2026</span>
+      </div>
+      <p class="proj-desc">Built an Excel and Power BI dashboard analyzing sales and financial performance end to end. Validated and cleaned 800+ financial records, then used Power Query and DAX to build calculated profit-margin measures and country/product-level breakdowns. Tracked Total Sales, Total Profit, and units sold through interactive slicers for country, product, segment, and time period, and evaluated discount trends to recommend profit-optimization strategies to management.</p>
+      <div class="proj-stat">Total Sales <span class="mono">$118.7M</span> · Total Profit <span class="mono">$16.9M</span> · France led on profit at <span class="mono">22.39%</span> ($3.78M) · Amarilla had the best margin at <span class="mono">15.86%</span></div>
+      <div class="tags"><span class="tag">POWER BI</span><span class="tag">EXCEL</span><span class="tag">POWER QUERY</span><span class="tag">DAX</span></div>
+      <div class="proj-foot">
+        <a class="proj-link" href="https://github.com/sirigiri063/Finance-Sales-Analysis-" target="_blank" rel="noopener">View on GitHub ↗</a>
+      </div>
+    </div>
+
+    <div class="proj-card">
+      <div class="proj-top">
+        <span class="proj-title">Retail Sales Analysis Dashboard</span>
+        <span class="proj-period">Feb – Mar 2026</span>
+      </div>
+      <p class="proj-desc">An end-to-end BA project covering the full pipeline from raw data to insight. Cleaned 1,000+ retail transactions in Excel, then used SQL (PostgreSQL) with GROUP BY, SUM, and COUNT to break sales down by category, gender, age group, and weekday/weekend. Built two Power BI dashboards — sales performance and customer insights — consolidating total sales, orders, average order value, and customer demographics into a single view, while supporting data governance by checking the integrity of the structured files behind it.</p>
+      <div class="proj-stat">Electronics led revenue, Beauty trailed · <span class="mono">45–54</span> age group spent the most · Weekday sales outperformed weekends</div>
+      <div class="tags"><span class="tag">SQL</span><span class="tag">POWER BI</span><span class="tag">EXCEL</span></div>
+      <div class="proj-foot">
+        <a class="proj-link" href="https://github.com/sirigiri063/retail-sales-analysis-powerbi-sql" target="_blank" rel="noopener">View on GitHub ↗</a>
+      </div>
+    </div>
+
+    <div class="proj-card">
+      <div class="proj-top">
+        <span class="proj-title">Superstore Sales Dashboard</span>
+        <span class="proj-period">Personal project</span>
+      </div>
+      <p class="proj-desc">A compact simulation of a real-world sales and profit analysis, covering the full BA workflow: cleaning data in Excel, querying it with SQL, and visualizing it in Power BI. The dashboard surfaces KPI cards for total sales, profit, and orders, plus breakdowns by category, region, and segment, alongside a top-5 products view and a monthly sales trend to track momentum over time.</p>
+      <div class="proj-stat">Consumer segment led sales · Technology drove the most revenue · West region was the most profitable</div>
+      <div class="tags"><span class="tag">POWER BI</span><span class="tag">SQL</span><span class="tag">EXCEL</span></div>
+      <div class="proj-foot">
+        <a class="proj-link" href="https://github.com/sirigiri063/superstore-sales-dashboard" target="_blank" rel="noopener">View on GitHub ↗</a>
+      </div>
+    </div>
+
+    <div class="proj-card">
+      <div class="proj-top">
+        <span class="proj-title">Sales &amp; Customer Insights Dashboard</span>
+        <span class="proj-period">Personal project</span>
+      </div>
+      <p class="proj-desc">A Power BI dashboard analyzing e-commerce sales data, backed by SQL queries and a full set of BA documentation — BRD, FRD, and NFRD — rather than just the dashboard itself. Built to identify top-performing categories and products, analyze customer purchasing behavior, and track monthly revenue trends to support business decisions.</p>
+      <div class="proj-stat">Revenue concentrated in a handful of categories and top buyers, with monthly swings pointing to seasonal demand</div>
+      <div class="tags"><span class="tag">POWER BI</span><span class="tag">SQL</span><span class="tag">EXCEL</span></div>
+      <div class="proj-foot">
+        <a class="proj-link" href="https://github.com/sirigiri063/sales-customer-insights-dashboard" target="_blank" rel="noopener">View on GitHub ↗</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section id="skills" style="background:var(--card); border-top:1px solid var(--line); border-bottom:1px solid var(--line);">
+  <div class="wrap section-head reveal">
+    <span class="eyebrow">// Skills</span>
+    <h2>The toolkit behind the dashboards.</h2>
+  </div>
+  <div class="wrap skills-grid reveal">
+    <div class="skill-group">
+      <h3>Tools &amp; Platforms</h3>
+      <div class="pill-row">
+        <span class="pill">Power BI</span><span class="pill">Excel</span><span class="pill">SQL</span>
+        <span class="pill">Tableau</span><span class="pill">Google Ads</span><span class="pill">Google Analytics</span>
+        <span class="pill">MS Outlook</span><span class="pill">GitHub</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <h3>Databases</h3>
+      <div class="pill-row">
+        <span class="pill">PostgreSQL</span><span class="pill">SQL</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <h3>Core Skills</h3>
+      <div class="pill-row">
+        <span class="pill">Data Visualization</span><span class="pill">Data Analysis</span>
+        <span class="pill">Financial Reporting</span><span class="pill">Dashboard Development</span>
+        <span class="pill">Management Reporting</span><span class="pill">Business Planning &amp; Analysis</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <h3>Soft Skills</h3>
+      <div class="pill-row">
+        <span class="pill">Communication</span><span class="pill">Stakeholder Management</span>
+        <span class="pill">Reporting &amp; Analysis</span><span class="pill">Requirement Gathering</span>
+        <span class="pill">Problem Solving</span><span class="pill">Critical Thinking</span>
+        <span class="pill">Teamwork</span><span class="pill">Leadership</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <h3>Languages</h3>
+      <div class="pill-row">
+        <span class="pill">English</span><span class="pill">Telugu</span><span class="pill">Hindi</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="education">
+  <div class="wrap section-head reveal">
+    <span class="eyebrow">// Education &amp; Certifications</span>
+    <h2>Background, training, and proof of work.</h2>
+  </div>
+  <div class="wrap reveal">
+
+    <div class="edu-block">
+      <div class="subhead">Education</div>
+      <div class="cred-grid">
+        <div class="cred-card">
+          <div class="name">MBA</div>
+          <div class="issuer">ICFAI Business School, Hyderabad</div>
+          <div class="meta">
+            <span class="date">May 2023 – Feb 2025</span>
+            <span class="cgpa">CGPA 6.36</span>
+          </div>
+        </div>
+        <div class="cred-card">
+          <div class="name">BBA</div>
+          <div class="issuer">ICFAI Business School, Hyderabad</div>
+          <div class="meta">
+            <span class="date">Aug 2020 – May 2023</span>
+            <span class="cgpa">CGPA 6.85</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="edu-block" style="margin-bottom:0;">
+      <div class="subhead">Certifications</div>
+      <div class="cred-grid">
+        <div class="cred-card cert">
+          <div class="name">Data Analyst – Big 4 Ready Certification</div>
+          <div class="issuer">OneRoadmap</div>
+          <div class="meta"><span class="date">Apr 2026</span></div>
+        </div>
+        <div class="cred-card cert">
+          <div class="name">Data Analyst</div>
+          <div class="issuer">OneRoadmap</div>
+          <div class="meta"><span class="date">May 2026</span></div>
+        </div>
+        <div class="cred-card cert">
+          <div class="name">Business Analysis Fundamentals — IIBA Endorsed</div>
+          <div class="issuer">Udemy</div>
+          <div class="meta"><span class="date">Apr 2026</span></div>
+        </div>
+        <div class="cred-card cert">
+          <div class="name">Data Analytics Job Simulation</div>
+          <div class="issuer">Forage — Deloitte Australia</div>
+          <div class="meta"><span class="date">Feb 2026</span></div>
+        </div>
+        <div class="cred-card cert">
+          <div class="name">Technology Job Simulation</div>
+          <div class="issuer">Forage — Deloitte Australia</div>
+          <div class="meta"><span class="date">Jun 2026</span></div>
+        </div>
+        <div class="cred-card cert">
+          <div class="name">AI Tools Workshop</div>
+          <div class="issuer">Be10x</div>
+          <div class="meta"><span class="date">Mar 2026</span></div>
+        </div>
+        <div class="cred-card cert">
+          <div class="name">Advanced Google Analytics</div>
+          <div class="issuer">LinkedIn Learning</div>
+          <div class="meta"><span class="date">Jul 2025</span></div>
+        </div>
+        <div class="cred-card cert">
+          <div class="name">Google Digital Marketing &amp; E-commerce</div>
+          <div class="issuer">Google</div>
+          <div class="meta"><span class="date">Dec 2024</span></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="wrap reveal" style="margin-top:56px;">
+    <div class="award-card">
+      <div class="award-mark"></div>
+      <div>
+        <h3>Club President, Infinity Studios — ICFAI Business School, Hyderabad</h3>
+        <div class="award-meta">2023 – 2025 · Student Club · MBA</div>
+        <p>Led a team of 100+ members, planning events and managing operations — earning the Best Emerging Club award for growth, team engagement, and overall performance. Built leadership, team management, and stakeholder communication skills that carry directly into BA work.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="contact-inner">
+    <span class="eyebrow">// Contact</span>
+    <h2>Let's talk about your data.</h2>
+    <p class="sub">Open to Business Analyst and BI/reporting roles in Hyderabad and remote.</p>
+    <div class="contact-grid">
+      <div class="contact-item">
+        <span class="label">Email</span>
+        <a class="value" href="mailto:sirigiri.063@gmail.com">sirigiri.063@gmail.com</a>
+      </div>
+      <div class="contact-item">
+        <span class="label">Phone</span>
+        <a class="value" href="tel:+919121855894">+91 91218 55894</a>
+      </div>
+      <div class="contact-item">
+        <span class="label">LinkedIn</span>
+        <a class="value" href="https://www.linkedin.com/in/sirigiri03/" target="_blank" rel="noopener">sirigiri03</a>
+      </div>
+      <div class="contact-item">
+        <span class="label">GitHub</span>
+        <a class="value" href="https://github.com/sirigiri063" target="_blank" rel="noopener">sirigiri063</a>
+      </div>
+      <div class="contact-item">
+        <span class="label">Location</span>
+        <span class="value">Hyderabad, IN</span>
+      </div>
+    </div>
+    <div class="copyright">© 2026 Sirigiri Malakonda Reddy</div>
+  </div>
+</footer>
+
+<script>
+  const menuBtn = document.getElementById('menuBtn');
+  const navLinks = document.getElementById('navLinks');
+  menuBtn.addEventListener('click', () => navLinks.classList.toggle('open'));
+  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
+
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(!reduceMotion){
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('visible'); } });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  } else {
+    document.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
+  }
+</script>
+
+</body>
+</html>
