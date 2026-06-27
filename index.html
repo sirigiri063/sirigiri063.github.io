@@ -8,9 +8,9 @@
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --ink:#0F1923;--ink2:#2C3E50;--muted:#6B7B8D;--rule:#DDE3EA;
-  --bg:#F7F9FB;--white:#FFFFFF;--blue:#1B4F8A;--blue-light:#EBF1FA;
-  --accent:#C8A96E;--accent-light:#FBF6EE;--green:#1A6B4A;
+--ink:#0F1923;--ink2:#2C3E50;--muted:#6B7B8D;--rule:#DDE3EA;
+--bg:#F7F9FB;--white:#FFFFFF;--blue:#1B4F8A;--blue-light:#EBF1FA;
+--accent:#C8A96E;--accent-light:#FBF6EE;--green:#1A6B4A;
 }
 html{scroll-behavior:smooth}
 body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--ink);font-size:15px;line-height:1.7}
@@ -27,9 +27,9 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(247,249,251,
 .hero-sub{font-size:17px;color:var(--ink2);max-width:620px;line-height:1.75;margin-bottom:40px}
 .hero-sub strong{color:var(--blue)}
 .hero-cta{display:flex;flex-wrap:wrap;gap:14px;margin-bottom:64px}
-.btn-primary{padding:12px 28px;background:var(--blue);color:#fff;border-radius:4px;font-size:14px;font-weight:600;text-decoration:none;transition:background 0.2s,transform 0.15s}
+.btn-primary{padding:12px 28px;background:var(--blue);color:#fff;border-radius:4px;font-size:14px;font-weight:600;text-decoration:none;transition:background 0.2s,transform 0.15s;display:inline-block}
 .btn-primary:hover{background:#163f72;transform:translateY(-1px)}
-.btn-outline{padding:12px 28px;border:1.5px solid var(--blue);color:var(--blue);border-radius:4px;font-size:14px;font-weight:600;text-decoration:none;transition:all 0.2s}
+.btn-outline{padding:12px 28px;border:1.5px solid var(--blue);color:var(--blue);border-radius:4px;font-size:14px;font-weight:600;text-decoration:none;transition:all 0.2s;display:inline-block}
 .btn-outline:hover{background:var(--blue-light)}
 .hero-stats{display:flex;flex-wrap:wrap;gap:0;border-top:1px solid var(--rule);padding-top:40px}
 .stat{padding:0 40px 0 0;border-right:1px solid var(--rule);margin-right:40px}
@@ -59,9 +59,16 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(247,249,251,
 .exp-bullets li strong{color:var(--ink);font-weight:600}
 .exp-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:16px}
 .tag{font-size:11px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;padding:4px 10px;background:var(--blue-light);color:var(--blue);border-radius:3px}
+
+.filter-bar{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:36px}
+.filter-btn{font-size:12.5px;font-weight:600;letter-spacing:0.04em;color:var(--muted);background:var(--white);border:1px solid var(--rule);padding:9px 18px;border-radius:30px;cursor:pointer;transition:all 0.2s;font-family:'Inter',sans-serif}
+.filter-btn:hover{border-color:var(--blue);color:var(--blue)}
+.filter-btn.active{background:var(--blue);border-color:var(--blue);color:#fff}
+
 .projects-grid{display:flex;flex-direction:column;gap:24px}
 .project-card{background:var(--white);border:1px solid var(--rule);border-radius:10px;padding:36px 40px;transition:box-shadow 0.2s,transform 0.2s;position:relative}
 .project-card:hover{box-shadow:0 8px 32px rgba(27,79,138,0.10);transform:translateY(-2px)}
+.project-card.hidden{display:none}
 .project-card.featured{border-left:4px solid var(--blue)}
 .project-badge{position:absolute;top:24px;right:24px;font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;padding:4px 10px;border-radius:20px}
 .badge-main{background:var(--blue);color:#fff}
@@ -77,6 +84,13 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(247,249,251,
 .impact-chip{font-size:12px;font-weight:600;color:var(--green);background:#EBF5F0;padding:5px 12px;border-radius:20px}
 .project-link{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:600;color:var(--blue);text-decoration:none;margin-top:16px;transition:gap 0.2s}
 .project-link:hover{gap:10px}
+.project-gallery{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:20px}
+.project-gallery.single{grid-template-columns:1fr}
+.shot{display:block;border-radius:8px;overflow:hidden;border:1px solid var(--rule);cursor:zoom-in;position:relative}
+.shot img{width:100%;display:block;transition:transform 0.3s}
+.shot:hover img{transform:scale(1.03)}
+.shot-label{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(15,25,35,0.7));color:#fff;font-size:11px;font-weight:600;padding:18px 12px 8px;letter-spacing:0.03em}
+
 .skills-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
 .skill-group{background:var(--white);border:1px solid var(--rule);border-radius:8px;padding:24px}
 .skill-group-title{font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--blue);margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid var(--rule)}
@@ -101,210 +115,336 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(247,249,251,
 .contact-link-label{font-size:11px;color:rgba(255,255,255,0.55);font-weight:600;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:2px}
 .contact-link-val{font-size:14px;color:#fff;font-weight:500}
 footer{text-align:center;padding:32px;font-size:12px;color:var(--muted);border-top:1px solid var(--rule);max-width:1100px;margin:0 auto}
+
+#lightbox{position:fixed;inset:0;background:rgba(15,25,35,0.92);display:none;align-items:center;justify-content:center;z-index:200;padding:40px;cursor:zoom-out}
+#lightbox.open{display:flex}
+#lightbox img{max-width:100%;max-height:100%;border-radius:6px;box-shadow:0 20px 60px rgba(0,0,0,0.4)}
+#lightbox .lb-close{position:absolute;top:24px;right:32px;color:#fff;font-size:28px;font-weight:300;cursor:pointer;line-height:1}
+
 @media(max-width:768px){
-  nav{padding:0 20px}.nav-links{display:none}
-  .hero{padding:90px 24px 60px}.wrap{padding:60px 24px}
-  .about-grid,.skills-grid,.edu-cert-grid{grid-template-columns:1fr}
-  .exp-item{grid-template-columns:1fr;gap:8px}
-  .contact-wrap{grid-template-columns:1fr;padding:40px 28px}
-  .stat{padding:0 20px 0 0;margin-right:20px}
-  .project-card{padding:24px}
+nav{padding:0 20px}.nav-links{display:none}
+.hero{padding:90px 24px 60px}.wrap{padding:60px 24px}
+.about-grid,.skills-grid,.edu-cert-grid{grid-template-columns:1fr}
+.exp-item{grid-template-columns:1fr;gap:8px}
+.contact-wrap{grid-template-columns:1fr;padding:40px 28px}
+.stat{padding:0 20px 0 0;margin-right:20px}
+.project-card{padding:24px}
+.project-gallery{grid-template-columns:1fr}
 }
 </style>
 </head>
 <body>
-
 <nav>
-  <div class="nav-logo">SMR</div>
-  <ul class="nav-links">
-    <li><a href="#about">About</a></li>
-    <li><a href="#experience">Experience</a></li>
-    <li><a href="#projects">Projects</a></li>
-    <li><a href="#skills">Skills</a></li>
-    <li><a href="#education">Education</a></li>
-    <li><a href="#contact">Contact</a></li>
-  </ul>
+<div class="nav-logo">SMR</div>
+<ul class="nav-links">
+<li><a href="#about">About</a></li>
+<li><a href="#experience">Experience</a></li>
+<li><a href="#projects">Projects</a></li>
+<li><a href="#skills">Skills</a></li>
+<li><a href="#education">Education</a></li>
+<li><a href="#contact">Contact</a></li>
+</ul>
 </nav>
 
 <div class="hero">
-  <div class="hero-eyebrow">Business Analyst · BI · Research & Insights · Consulting</div>
-  <h1>Turning raw data into<br/><em>decisions people act on.</em></h1>
-  <p class="hero-sub">MBA-qualified analyst who independently built a <strong>Deloitte AI strategy</strong> benchmarked against Big 4 competitors — and builds Power BI dashboards, cleans datasets, and presents insights to C-level stakeholders.</p>
-  <div class="hero-cta">
-    <a href="#projects" class="btn-primary">View My Work</a>
-    <a href="#contact" class="btn-outline">Get in Touch</a>
-  </div>
-  <div class="hero-stats">
-    <div class="stat"><div class="stat-num">800+</div><div class="stat-label">Financial records cleaned</div></div>
-    <div class="stat"><div class="stat-num">20%</div><div class="stat-label">ROI improvement driven</div></div>
-    <div class="stat"><div class="stat-num">24</div><div class="stat-label">Big 4 sources researched</div></div>
-    <div class="stat"><div class="stat-num">6</div><div class="stat-label">Business deals closed</div></div>
-  </div>
+<div class="hero-eyebrow">Business Analyst · BI · Research & Insights · Consulting</div>
+<h1>Turning raw data into<br/><em>decisions people act on.</em></h1>
+<p class="hero-sub">MBA-qualified analyst who independently built a <strong>Deloitte AI strategy</strong> benchmarked against Big 4 competitors — and builds Power BI dashboards, cleans datasets, and presents insights to C-level stakeholders.</p>
+<div class="hero-cta">
+<a href="#projects" class="btn-primary">View My Work</a>
+<a href="#contact" class="btn-outline">Get in Touch</a>
+</div>
+<div class="hero-stats">
+<div class="stat"><div class="stat-num">800+</div><div class="stat-label">Financial records cleaned</div></div>
+<div class="stat"><div class="stat-num">20%</div><div class="stat-label">ROI improvement driven</div></div>
+<div class="stat"><div class="stat-num">24</div><div class="stat-label">Big 4 sources researched</div></div>
+<div class="stat"><div class="stat-num">5</div><div class="stat-label">Analytics projects shipped</div></div>
+</div>
 </div>
 
 <div id="about" class="wrap">
-  <div class="section-eyebrow">About</div>
-  <div class="section-title">The analyst behind the dashboards.</div>
-  <div class="about-grid">
-    <div class="about-text">
-      <p>I'm a Business Analyst and BI professional based in Hyderabad with an MBA in Marketing & Operations. My work sits at the intersection of <strong>data, strategy, and stakeholder communication</strong> — I don't just build dashboards, I make sure the right people understand what the data is saying and what to do about it.</p>
-      <p>I've restructured company process flows with CEOs, led teams of 5 across 4 client accounts, independently built a <strong>consulting-grade AI strategy for Deloitte</strong>, and delivered financial dashboards tracking $118.7M in sales. Every project starts with the business problem first.</p>
-      <p>Actively targeting <strong>Business Analyst, BI, and Research & Insights roles in consulting-driven environments</strong> — where structured thinking, clean data, and sharp stakeholder communication are valued.</p>
-    </div>
-    <div class="about-cards">
-      <div class="about-card"><div class="about-card-label">Location</div><div class="about-card-val">Hyderabad, Telangana · Open to Remote</div></div>
-      <div class="about-card"><div class="about-card-label">Targeting</div><div class="about-card-val">Business Analyst · BI Analyst · Research & Insights · Consulting</div></div>
-      <div class="about-card"><div class="about-card-label">Core Stack</div><div class="about-card-val">Power BI (DAX, Power Query) · SQL (PostgreSQL) · Advanced Excel</div></div>
-      <div class="about-card"><div class="about-card-label">Education</div><div class="about-card-val">MBA, Marketing & Operations — ICFAI Business School</div></div>
-    </div>
-  </div>
+<div class="section-eyebrow">About</div>
+<div class="section-title">The analyst behind the dashboards.</div>
+<div class="about-grid">
+<div class="about-text">
+<p>I'm a Business Analyst and BI professional based in Hyderabad with an MBA in Marketing & Operations. My work sits at the intersection of <strong>data, strategy, and stakeholder communication</strong> — I don't just build dashboards, I make sure the right people understand what the data is saying and what to do about it.</p>
+<p>I've restructured company process flows with CEOs, led teams of 5 across 4 client accounts, independently built a <strong>consulting-grade AI strategy for Deloitte</strong>, and delivered financial dashboards tracking $118.7M in sales. Every project starts with the business problem first.</p>
+<p>Actively targeting <strong>Business Analyst, BI, and Research & Insights roles in consulting-driven environments</strong> — where structured thinking, clean data, and sharp stakeholder communication are valued.</p>
+</div>
+<div class="about-cards">
+<div class="about-card"><div class="about-card-label">Location</div><div class="about-card-val">Hyderabad, Telangana · Open to Remote</div></div>
+<div class="about-card"><div class="about-card-label">Targeting</div><div class="about-card-val">Business Analyst · BI Analyst · Research & Insights · Consulting</div></div>
+<div class="about-card"><div class="about-card-label">Core Stack</div><div class="about-card-val">Power BI (DAX, Power Query) · SQL (PostgreSQL) · Advanced Excel</div></div>
+<div class="about-card"><div class="about-card-label">Education</div><div class="about-card-val">MBA, Marketing & Operations — ICFAI Business School</div></div>
+</div>
+</div>
 </div>
 
 <div id="experience" class="bg-white">
 <div class="wrap">
-  <div class="section-eyebrow">Experience</div>
-  <div class="section-title">Where I've put this to work.</div>
-  <div class="exp-list">
-    <div class="exp-item">
-      <div><div class="exp-dates">Jul 2025 – Apr 2026</div><div class="exp-company">Roll Home Developers</div><div class="exp-loc">Hyderabad · Freelance</div></div>
-      <div><div class="exp-title">Digital Marketing Executive</div>
-        <ul class="exp-bullets">
-          <li>Built a Power BI dashboard consolidating 5+ KPIs from 3 data sources; identified underperforming ad sets and recommended budget reallocation — <strong>driving 15–20% increase in lead conversions.</strong></li>
-        </ul>
-        <div class="exp-tags"><span class="tag">Power BI</span><span class="tag">Google Ads</span><span class="tag">Google Analytics</span><span class="tag">Excel</span></div>
-      </div>
-    </div>
-    <div class="exp-item">
-      <div><div class="exp-dates">Feb 2025 – Jun 2025</div><div class="exp-company">Anyra Projects</div><div class="exp-loc">Hyderabad · Full-time</div></div>
-      <div><div class="exp-title">Process Lead & Digital Marketing Strategist</div>
-        <ul class="exp-bullets">
-          <li>Mapped and restructured the company's end-to-end process flow with the CEO and key stakeholders — <strong>enabling the team to close 6 business deals within 6 months.</strong></li>
-          <li>Led a team of 5 managing digital presence for 4 companies (Anukar Homes, Anyra Projects, Adwink, VRR Krishnam); owned full-year campaign strategy and reporting — <strong>delivering 20% ROI improvement.</strong></li>
-          <li>Built KPI dashboards in Excel for C-level stakeholders; translated data into insights that <strong>supported strategic decision-making and client retention.</strong></li>
-        </ul>
-        <div class="exp-tags"><span class="tag">Excel</span><span class="tag">Google Ads</span><span class="tag">Stakeholder Mgmt</span><span class="tag">KPI Reporting</span></div>
-      </div>
-    </div>
-    <div class="exp-item">
-      <div><div class="exp-dates">Feb 2024 – Jun 2024</div><div class="exp-company">Adwink</div><div class="exp-loc">Hyderabad · Internship</div></div>
-      <div><div class="exp-title">Digital Marketing Intern</div>
-        <ul class="exp-bullets">
-          <li>Managed Google Ads end-to-end and built Excel dashboards tracking 4 channels; conducted competitor analysis surfacing 3 content gaps — <strong>improving campaign-to-conversion rate by 30%.</strong></li>
-        </ul>
-        <div class="exp-tags"><span class="tag">Excel</span><span class="tag">Google Ads</span><span class="tag">Market Research</span></div>
-      </div>
-    </div>
-  </div>
+<div class="section-eyebrow">Experience</div>
+<div class="section-title">Where I've put this to work.</div>
+<div class="exp-list">
+<div class="exp-item">
+<div><div class="exp-dates">Jul 2025 – Apr 2026</div><div class="exp-company">Roll Home Developers</div><div class="exp-loc">Hyderabad · Freelance</div></div>
+<div><div class="exp-title">Digital Marketing Executive</div>
+<ul class="exp-bullets">
+<li>Built a Power BI dashboard consolidating 5+ KPIs from 3 data sources; identified underperforming ad sets and recommended budget reallocation — <strong>driving 15–20% increase in lead conversions.</strong></li>
+</ul>
+<div class="exp-tags"><span class="tag">Power BI</span><span class="tag">Google Ads</span><span class="tag">Google Analytics</span><span class="tag">Excel</span></div>
+</div>
+</div>
+<div class="exp-item">
+<div><div class="exp-dates">Feb 2025 – Jun 2025</div><div class="exp-company">Anyra Projects</div><div class="exp-loc">Hyderabad · Full-time</div></div>
+<div><div class="exp-title">Process Lead & Digital Marketing Strategist</div>
+<ul class="exp-bullets">
+<li>Mapped and restructured the company's end-to-end process flow with the CEO and key stakeholders — <strong>enabling the team to close 6 business deals within 6 months.</strong></li>
+<li>Led a team of 5 managing digital presence for 4 companies (Anukar Homes, Anyra Projects, Adwink, VRR Krishnam); owned full-year campaign strategy and reporting — <strong>delivering 20% ROI improvement.</strong></li>
+<li>Built KPI dashboards in Excel for C-level stakeholders; translated data into insights that <strong>supported strategic decision-making and client retention.</strong></li>
+</ul>
+<div class="exp-tags"><span class="tag">Excel</span><span class="tag">Google Ads</span><span class="tag">Stakeholder Mgmt</span><span class="tag">KPI Reporting</span></div>
+</div>
+</div>
+<div class="exp-item">
+<div><div class="exp-dates">Feb 2024 – Jun 2024</div><div class="exp-company">Adwink</div><div class="exp-loc">Hyderabad · Internship</div></div>
+<div><div class="exp-title">Digital Marketing Intern</div>
+<ul class="exp-bullets">
+<li>Managed Google Ads end-to-end and built Excel dashboards tracking 4 channels; conducted competitor analysis surfacing 3 content gaps — <strong>improving campaign-to-conversion rate by 30%.</strong></li>
+</ul>
+<div class="exp-tags"><span class="tag">Excel</span><span class="tag">Google Ads</span><span class="tag">Market Research</span></div>
+</div>
+</div>
+</div>
 </div>
 </div>
 
 <div id="projects" class="wrap">
-  <div class="section-eyebrow">Projects</div>
-  <div class="section-title">Work that speaks for itself.</div>
-  <div class="projects-grid">
-    <div class="project-card featured">
-      <span class="project-badge badge-main">⭐ Main Project</span>
-      <div class="project-type">Consulting Research · Strategy · Analytics</div>
-      <div class="project-title">AI Knowledge Management Strategy — Deloitte</div>
-      <div class="project-tools"><span class="tag">Research & Analysis</span><span class="tag">Power BI</span><span class="tag">Excel</span><span class="tag">Big 4 Benchmarking</span><span class="tag">Root Cause Analysis</span></div>
-      <ul class="project-desc">
-        <li>Identified that Deloitte consultants lose <strong>41% of their workday</strong> to non-value search and trail competitors by 7× in AI training (75K vs Accenture 550K) — conducted independent research across 24 verified Big 4 sources to diagnose the root cause.</li>
-        <li>Benchmarked Deloitte against Accenture, PwC, and McKinsey using a <strong>5-Why root cause framework</strong>; built an Excel research tracker and interactive Power BI-style dashboard summarising findings across a 3-phase implementation roadmap.</li>
-        <li>Delivered a 3-tier strategic recommendation framework — <strong>projected 35% search time reduction, 41% workday recovery, and 5%+ EBIT improvement</strong> — packaged as a 12-page portfolio, executive summary, and 10-slide C-suite deck.</li>
-      </ul>
-      <div class="project-impact">
-        <span class="impact-chip">35% knowledge search time saved</span>
-        <span class="impact-chip">24 verified Big 4 sources</span>
-        <span class="impact-chip">3-tier strategy framework</span>
-        <span class="impact-chip">10-slide C-suite deck</span>
-      </div>
-      <a href="https://github.com/sirigiri063/deloitte-km-strategy" target="_blank" class="project-link">View Full Project on GitHub →</a>
-    </div>
-    <div class="project-card">
-      <span class="project-badge badge-data">Dashboard</span>
-      <div class="project-type">Financial Analytics · Dashboard Development</div>
-      <div class="project-title">Finance Sales Analysis Dashboard</div>
-      <div class="project-tools"><span class="tag">Power BI</span><span class="tag">DAX</span><span class="tag">Power Query</span><span class="tag">SQL</span><span class="tag">Excel</span></div>
-      <ul class="project-desc">
-        <li>Validated and cleaned 800+ financial records in Excel — removed duplicates, standardized formats, built a reliable dataset for regional and segment-level analysis.</li>
-        <li>Built interactive Power BI dashboard using DAX and Power Query tracking <strong>Total Sales ($118.7M), Total Profit ($16.9M)</strong> and profit margin by segment and country with drill-down capability.</li>
-        <li>Identified France as the top profit-generating country (22.39%, $3.78M) and Government as the highest-revenue segment (44.47%) — <strong>presented data-driven profit optimization recommendations to stakeholders.</strong></li>
-      </ul>
-      <div class="project-impact">
-        <span class="impact-chip">$118.7M sales tracked</span>
-        <span class="impact-chip">800+ records cleaned</span>
-        <span class="impact-chip">France top profit country</span>
-      </div>
-      <a href="https://github.com/sirigiri063/Finance-Sales-Analysis-" target="_blank" class="project-link">View on GitHub →</a>
-    </div>
-  </div>
+<div class="section-eyebrow">Projects</div>
+<div class="section-title">Work that speaks for itself.</div>
+
+<div class="filter-bar">
+<button class="filter-btn active" data-filter="all">All Projects (5)</button>
+<button class="filter-btn" data-filter="featured">⭐ Featured Research</button>
+<button class="filter-btn" data-filter="dashboard">📊 BI Dashboards</button>
+</div>
+
+<div class="projects-grid">
+
+<div class="project-card featured" data-cat="featured">
+<span class="project-badge badge-main">⭐ Main Project</span>
+<div class="project-type">Consulting Research · Strategy · Analytics</div>
+<div class="project-title">AI Knowledge Management Strategy — Deloitte</div>
+<div class="project-tools"><span class="tag">Research & Analysis</span><span class="tag">Power BI</span><span class="tag">Excel</span><span class="tag">Big 4 Benchmarking</span><span class="tag">Root Cause Analysis</span></div>
+<ul class="project-desc">
+<li>Identified that Deloitte consultants lose <strong>41% of their workday</strong> to non-value search and trail competitors by 7× in AI training (75K vs Accenture 550K) — conducted independent research across 24 verified Big 4 sources to diagnose the root cause.</li>
+<li>Benchmarked Deloitte against Accenture, PwC, and McKinsey using a <strong>5-Why root cause framework</strong>; built an Excel research tracker and interactive Power BI-style dashboard summarising findings across a 3-phase implementation roadmap.</li>
+<li>Delivered a 3-tier strategic recommendation framework — <strong>projected 35% search time reduction, 41% workday recovery, and 5%+ EBIT improvement</strong> — packaged as a 12-page portfolio, executive summary, and 10-slide C-suite deck.</li>
+</ul>
+<div class="project-impact">
+<span class="impact-chip">35% knowledge search time saved</span>
+<span class="impact-chip">24 verified Big 4 sources</span>
+<span class="impact-chip">3-tier strategy framework</span>
+<span class="impact-chip">10-slide C-suite deck</span>
+</div>
+<a href="https://github.com/sirigiri063/deloitte-km-strategy" target="_blank" class="project-link">View Full Project on GitHub →</a>
+</div>
+
+<div class="project-card" data-cat="dashboard">
+<span class="project-badge badge-data">Dashboard</span>
+<div class="project-type">Financial Analytics · Dashboard Development</div>
+<div class="project-title">Finance Sales Analysis Dashboard</div>
+<div class="project-tools"><span class="tag">Power BI</span><span class="tag">DAX</span><span class="tag">Power Query</span><span class="tag">SQL</span><span class="tag">Excel</span></div>
+<ul class="project-desc">
+<li>Validated and cleaned 800+ financial records in Excel — removed duplicates, standardized formats, built a reliable dataset for regional and segment-level analysis.</li>
+<li>Built interactive Power BI dashboard using DAX and Power Query tracking <strong>Total Sales ($118.7M), Total Profit ($16.9M)</strong> and profit margin by segment and country with drill-down capability.</li>
+<li>Identified France as the top profit-generating country (22.39%, $3.78M) and Government as the highest-revenue segment (44.47%) — <strong>presented data-driven profit optimization recommendations to stakeholders.</strong></li>
+</ul>
+<div class="project-impact">
+<span class="impact-chip">$118.7M sales tracked</span>
+<span class="impact-chip">800+ records cleaned</span>
+<span class="impact-chip">France top profit country</span>
+</div>
+<a href="https://github.com/sirigiri063/Finance-Sales-Analysis-" target="_blank" class="project-link">View on GitHub →</a>
+</div>
+
+<div class="project-card" data-cat="dashboard">
+<span class="project-badge badge-data">Dashboard</span>
+<div class="project-type">Retail Analytics · Dashboard Development</div>
+<div class="project-title">Superstore Sales & Profit Dashboard</div>
+<div class="project-tools"><span class="tag">Power BI</span><span class="tag">SQL</span><span class="tag">Excel</span></div>
+<div class="project-gallery single">
+<a class="shot" href="https://raw.githubusercontent.com/sirigiri063/superstore-sales-dashboard/main/screenshot.png" target="_blank" onclick="return openLightbox(event,'https://raw.githubusercontent.com/sirigiri063/superstore-sales-dashboard/main/screenshot.png')">
+<img src="https://raw.githubusercontent.com/sirigiri063/superstore-sales-dashboard/main/screenshot.png" alt="Superstore Sales Dashboard preview" loading="lazy"/>
+<span class="shot-label">Click to enlarge</span>
+</a>
+</div>
+<ul class="project-desc">
+<li>Built an interactive Power BI dashboard with KPI cards for Total Sales, Total Profit, and Total Orders across categories, regions, and segments.</li>
+<li>Found the <strong>Consumer segment drives the highest sales</strong>, Technology leads revenue, and the West region shows the strongest profitability.</li>
+<li>Flagged loss-making products and a steady upward sales trend — surfaced for stakeholder review.</li>
+</ul>
+<div class="project-impact">
+<span class="impact-chip">Technology = top revenue category</span>
+<span class="impact-chip">West region = highest profit</span>
+</div>
+<a href="https://github.com/sirigiri063/superstore-sales-dashboard" target="_blank" class="project-link">View on GitHub →</a>
+</div>
+
+<div class="project-card" data-cat="dashboard">
+<span class="project-badge badge-data">Dashboard</span>
+<div class="project-type">E-commerce Analytics · Dashboard Development</div>
+<div class="project-title">Sales & Customer Insights Dashboard</div>
+<div class="project-tools"><span class="tag">Power BI</span><span class="tag">SQL</span><span class="tag">Excel</span></div>
+<div class="project-gallery single">
+<a class="shot" href="https://raw.githubusercontent.com/sirigiri063/sales-customer-insights-dashboard/main/Advanced_Sales_Customer_Insights.png" target="_blank" onclick="return openLightbox(event,'https://raw.githubusercontent.com/sirigiri063/sales-customer-insights-dashboard/main/Advanced_Sales_Customer_Insights.png')">
+<img src="https://raw.githubusercontent.com/sirigiri063/sales-customer-insights-dashboard/main/Advanced_Sales_Customer_Insights.png" alt="Sales and Customer Insights Dashboard preview" loading="lazy"/>
+<span class="shot-label">Click to enlarge</span>
+</a>
+</div>
+<ul class="project-desc">
+<li>Analyzed e-commerce sales data with full BRD/FRD documentation to uncover revenue trends, customer purchasing behavior, and top-performing products.</li>
+<li>Found that <strong>a small set of categories drives most revenue</strong> and that customer spend is concentrated among top buyers, with clear monthly seasonality.</li>
+<li>Delivered end-to-end: data cleaning, SQL querying, and an interactive Power BI dashboard for business decision-making.</li>
+</ul>
+<div class="project-impact">
+<span class="impact-chip">Revenue concentration insight</span>
+<span class="impact-chip">Seasonal trend detection</span>
+</div>
+<a href="https://github.com/sirigiri063/sales-customer-insights-dashboard" target="_blank" class="project-link">View on GitHub →</a>
+</div>
+
+<div class="project-card" data-cat="dashboard">
+<span class="project-badge badge-data">Dashboard</span>
+<div class="project-type">Retail Analytics · SQL + Power BI</div>
+<div class="project-title">Retail Sales Analysis & Customer Insights</div>
+<div class="project-tools"><span class="tag">Excel</span><span class="tag">SQL (PostgreSQL)</span><span class="tag">Power BI</span></div>
+<div class="project-gallery">
+<a class="shot" href="https://raw.githubusercontent.com/sirigiri063/retail-sales-analysis-powerbi-sql/main/Dashboard%201%20.jpeg" target="_blank" onclick="return openLightbox(event,'https://raw.githubusercontent.com/sirigiri063/retail-sales-analysis-powerbi-sql/main/Dashboard%201%20.jpeg')">
+<img src="https://raw.githubusercontent.com/sirigiri063/retail-sales-analysis-powerbi-sql/main/Dashboard%201%20.jpeg" alt="Retail Sales Performance Dashboard preview" loading="lazy"/>
+<span class="shot-label">Sales Performance</span>
+</a>
+<a class="shot" href="https://raw.githubusercontent.com/sirigiri063/retail-sales-analysis-powerbi-sql/main/Dashboard%202%20.jpeg" target="_blank" onclick="return openLightbox(event,'https://raw.githubusercontent.com/sirigiri063/retail-sales-analysis-powerbi-sql/main/Dashboard%202%20.jpeg')">
+<img src="https://raw.githubusercontent.com/sirigiri063/retail-sales-analysis-powerbi-sql/main/Dashboard%202%20.jpeg" alt="Retail Customer Insights Dashboard preview" loading="lazy"/>
+<span class="shot-label">Customer Insights</span>
+</a>
+</div>
+<ul class="project-desc">
+<li>Cleaned and structured raw retail data in Excel; derived Age Group and Weekday vs Weekend fields, then analyzed it with SQL (GROUP BY, SUM, COUNT) across category and demographic segments.</li>
+<li>Found <strong>weekday sales outperform weekends</strong>, Electronics leads revenue while Beauty lags, and the 45–54 age group contributes the highest sales.</li>
+<li>Built two linked Power BI dashboards — Sales Performance and Customer Insights — to support targeted marketing and category decisions.</li>
+</ul>
+<div class="project-impact">
+<span class="impact-chip">Electronics = top category</span>
+<span class="impact-chip">Age 45–54 = top spenders</span>
+</div>
+<a href="https://github.com/sirigiri063/retail-sales-analysis-powerbi-sql" target="_blank" class="project-link">View on GitHub →</a>
+</div>
+
+</div>
 </div>
 
 <div id="skills" class="bg-white">
 <div class="wrap">
-  <div class="section-eyebrow">Skills</div>
-  <div class="section-title">The toolkit behind the work.</div>
-  <div class="skills-grid">
-    <div class="skill-group">
-      <div class="skill-group-title">Tools & Platforms</div>
-      <div class="skill-pills">
-        <span class="pill">Power BI</span><span class="pill">DAX</span><span class="pill">Power Query</span><span class="pill">Advanced Excel</span><span class="pill">Pivot Tables</span><span class="pill">SQL</span><span class="pill">PostgreSQL</span><span class="pill">Tableau</span><span class="pill">Google Analytics</span><span class="pill">GitHub</span>
-      </div>
-    </div>
-    <div class="skill-group">
-      <div class="skill-group-title">Core BA & BI Skills</div>
-      <div class="skill-pills">
-        <span class="pill">Business Analysis</span><span class="pill">Data Validation</span><span class="pill">Data Cleaning</span><span class="pill">Dashboard Development</span><span class="pill">KPI Reporting</span><span class="pill">Financial Reporting</span><span class="pill">Research & Insights</span><span class="pill">Root Cause Analysis</span><span class="pill">Requirement Gathering</span>
-      </div>
-    </div>
-    <div class="skill-group">
-      <div class="skill-group-title">Consulting & Soft Skills</div>
-      <div class="skill-pills">
-        <span class="pill">Stakeholder Management</span><span class="pill">C-level Reporting</span><span class="pill">Structured Problem Solving</span><span class="pill">Minto Pyramid</span><span class="pill">STAR Method</span><span class="pill">Critical Thinking</span><span class="pill">Cross-functional Leadership</span>
-      </div>
-    </div>
-  </div>
+<div class="section-eyebrow">Skills</div>
+<div class="section-title">The toolkit behind the work.</div>
+<div class="skills-grid">
+<div class="skill-group">
+<div class="skill-group-title">Tools & Platforms</div>
+<div class="skill-pills">
+<span class="pill">Power BI</span><span class="pill">DAX</span><span class="pill">Power Query</span><span class="pill">Advanced Excel</span><span class="pill">Pivot Tables</span><span class="pill">SQL</span><span class="pill">PostgreSQL</span><span class="pill">Tableau</span><span class="pill">Google Analytics</span><span class="pill">GitHub</span>
+</div>
+</div>
+<div class="skill-group">
+<div class="skill-group-title">Core BA & BI Skills</div>
+<div class="skill-pills">
+<span class="pill">Business Analysis</span><span class="pill">Data Validation</span><span class="pill">Data Cleaning</span><span class="pill">Dashboard Development</span><span class="pill">KPI Reporting</span><span class="pill">Financial Reporting</span><span class="pill">Research & Insights</span><span class="pill">Root Cause Analysis</span><span class="pill">Requirement Gathering</span>
+</div>
+</div>
+<div class="skill-group">
+<div class="skill-group-title">Consulting & Soft Skills</div>
+<div class="skill-pills">
+<span class="pill">Stakeholder Management</span><span class="pill">C-level Reporting</span><span class="pill">Structured Problem Solving</span><span class="pill">Minto Pyramid</span><span class="pill">STAR Method</span><span class="pill">Critical Thinking</span><span class="pill">Cross-functional Leadership</span>
+</div>
+</div>
+</div>
 </div>
 </div>
 
 <div id="education" class="wrap">
-  <div class="section-eyebrow">Education & Certifications</div>
-  <div class="section-title">Background and proof of learning.</div>
-  <div class="edu-cert-grid">
-    <div>
-      <div class="edu-item"><div class="edu-degree">MBA, Marketing & Operations</div><div class="edu-school">ICFAI Business School, Hyderabad</div><div class="edu-dates">May 2023 – Feb 2025</div></div>
-      <div class="edu-item"><div class="edu-degree">BBA, Business Administration</div><div class="edu-school">ICFAI Business School, Hyderabad</div><div class="edu-dates">Aug 2020 – May 2023</div></div>
-      <div class="edu-item" style="border:none"><div class="edu-degree">Club President — Infinity Studios</div><div class="edu-school">ICFAI Business School · 2023–2025</div><div class="edu-dates" style="margin-top:6px;color:var(--ink2)">Led 100+ members · Won Best Emerging Club award</div></div>
-    </div>
-    <div class="cert-list">
-      <div class="cert-item"><div class="cert-dot"></div><div><div class="cert-name">Business Analysis Fundamentals – IIBA Endorsed</div><div class="cert-org">Udemy · Apr 2026</div></div></div>
-      <div class="cert-item"><div class="cert-dot"></div><div><div class="cert-name">Technology Job Simulation</div><div class="cert-org">Forage — Deloitte Australia · Jun 2026</div></div></div>
-      <div class="cert-item"><div class="cert-dot"></div><div><div class="cert-name">Data Analytics Job Simulation</div><div class="cert-org">Forage — Deloitte Australia · Feb 2026</div></div></div>
-      <div class="cert-item"><div class="cert-dot"></div><div><div class="cert-name">Advanced Google Analytics</div><div class="cert-org">LinkedIn Learning · Jul 2025</div></div></div>
-      <div class="cert-item"><div class="cert-dot"></div><div><div class="cert-name">Data Analyst – Big 4 Ready</div><div class="cert-org">OneRoadmap · Apr 2026</div></div></div>
-      <div class="cert-item"><div class="cert-dot"></div><div><div class="cert-name">Google Digital Marketing & E-commerce</div><div class="cert-org">Google · Dec 2024</div></div></div>
-    </div>
-  </div>
+<div class="section-eyebrow">Education & Certifications</div>
+<div class="section-title">Background and proof of learning.</div>
+<div class="edu-cert-grid">
+<div>
+<div class="edu-item"><div class="edu-degree">MBA, Marketing & Operations</div><div class="edu-school">ICFAI Business School, Hyderabad</div><div class="edu-dates">May 2023 – Feb 2025</div></div>
+<div class="edu-item"><div class="edu-degree">BBA, Business Administration</div><div class="edu-school">ICFAI Business School, Hyderabad</div><div class="edu-dates">Aug 2020 – May 2023</div></div>
+<div class="edu-item" style="border:none"><div class="edu-degree">Club President — Infinity Studios</div><div class="edu-school">ICFAI Business School · 2023–2025</div><div class="edu-dates" style="margin-top:6px;color:var(--ink2)">Led 100+ members · Won Best Emerging Club award</div></div>
+</div>
+<div class="cert-list">
+<div class="cert-item"><div class="cert-dot"></div><div><div class="cert-name">Business Analysis Fundamentals – IIBA Endorsed</div><div class="cert-org">Udemy · Apr 2026</div></div></div>
+<div class="cert-item"><div class="cert-dot"></div><div><div class="cert-name">Technology Job Simulation</div><div class="cert-org">Forage — Deloitte Australia · Jun 2026</div></div></div>
+<div class="cert-item"><div class="cert-dot"></div><div><div class="cert-name">Data Analytics Job Simulation</div><div class="cert-org">Forage — Deloitte Australia · Feb 2026</div></div></div>
+<div class="cert-item"><div class="cert-dot"></div><div><div class="cert-name">Advanced Google Analytics</div><div class="cert-org">LinkedIn Learning · Jul 2025</div></div></div>
+<div class="cert-item"><div class="cert-dot"></div><div><div class="cert-name">Data Analyst – Big 4 Ready</div><div class="cert-org">OneRoadmap · Apr 2026</div></div></div>
+<div class="cert-item"><div class="cert-dot"></div><div><div class="cert-name">Google Digital Marketing & E-commerce</div><div class="cert-org">Google · Dec 2024</div></div></div>
+</div>
+</div>
 </div>
 
 <div id="contact" style="padding:80px">
 <div style="max-width:1100px;margin:0 auto">
-  <div class="contact-wrap">
-    <div>
-      <div class="contact-headline">Let's talk about your data.</div>
-      <p class="contact-sub">Open to Business Analyst, BI, and Research & Insights roles in Hyderabad and remote. Happy to walk through any project in detail.</p>
-    </div>
-    <div class="contact-links">
-      <a href="mailto:sirigiri.063@gmail.com" class="contact-link"><div><div class="contact-link-label">Email</div><div class="contact-link-val">sirigiri.063@gmail.com</div></div></a>
-      <a href="tel:+919121855894" class="contact-link"><div><div class="contact-link-label">Phone</div><div class="contact-link-val">+91 91218 55894</div></div></a>
-      <a href="https://www.linkedin.com/in/sirigiri03/" target="_blank" class="contact-link"><div><div class="contact-link-label">LinkedIn</div><div class="contact-link-val">linkedin.com/in/sirigiri03</div></div></a>
-      <a href="https://github.com/sirigiri063" target="_blank" class="contact-link"><div><div class="contact-link-label">GitHub</div><div class="contact-link-val">github.com/sirigiri063</div></div></a>
-    </div>
-  </div>
+<div class="contact-wrap">
+<div>
+<div class="contact-headline">Let's talk about your data.</div>
+<p class="contact-sub">Open to Business Analyst, BI, and Research & Insights roles in Hyderabad and remote. Happy to walk through any project in detail.</p>
+</div>
+<div class="contact-links">
+<a href="mailto:sirigiri.063@gmail.com" class="contact-link"><div><div class="contact-link-label">Email</div><div class="contact-link-val">sirigiri.063@gmail.com</div></div></a>
+<a href="tel:+919121855894" class="contact-link"><div><div class="contact-link-label">Phone</div><div class="contact-link-val">+91 91218 55894</div></div></a>
+<a href="https://www.linkedin.com/in/sirigiri03/" target="_blank" class="contact-link"><div><div class="contact-link-label">LinkedIn</div><div class="contact-link-val">linkedin.com/in/sirigiri03</div></div></a>
+<a href="https://github.com/sirigiri063" target="_blank" class="contact-link"><div><div class="contact-link-label">GitHub</div><div class="contact-link-val">github.com/sirigiri063</div></div></a>
+</div>
+</div>
 </div>
 </div>
 
 <footer>© 2026 Sirigiri Malakonda Reddy · Hyderabad, India</footer>
+
+<div id="lightbox" onclick="closeLightbox(event)">
+<span class="lb-close" onclick="closeLightbox(event)">&times;</span>
+<img id="lightbox-img" src="" alt="Dashboard full preview"/>
+</div>
+
+<script>
+// Project filter
+document.querySelectorAll('.filter-btn').forEach(function(btn){
+  btn.addEventListener('click', function(){
+    document.querySelectorAll('.filter-btn').forEach(function(b){ b.classList.remove('active'); });
+    btn.classList.add('active');
+    var filter = btn.getAttribute('data-filter');
+    document.querySelectorAll('.project-card').forEach(function(card){
+      if(filter === 'all' || card.getAttribute('data-cat') === filter){
+        card.classList.remove('hidden');
+      } else {
+        card.classList.add('hidden');
+      }
+    });
+  });
+});
+
+// Lightbox
+function openLightbox(e, src){
+  e.preventDefault();
+  document.getElementById('lightbox-img').src = src;
+  document.getElementById('lightbox').classList.add('open');
+  return false;
+}
+function closeLightbox(e){
+  document.getElementById('lightbox').classList.remove('open');
+}
+document.addEventListener('keydown', function(e){
+  if(e.key === 'Escape') document.getElementById('lightbox').classList.remove('open');
+});
+</script>
 
 </body>
 </html>
